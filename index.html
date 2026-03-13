@@ -3,83 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Are You Autistic? - The Definitive 3-Question Quiz</title>
+<title>Er du autist? - The Tism Test</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&display=swap');
   
   * { margin: 0; padding: 0; box-sizing: border-box; }
   
   body {
     font-family: 'Space Grotesk', sans-serif;
     min-height: 100vh;
-    background: #0a0a0f;
+    background: #050508;
     color: #e0e0e0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow-x: hidden;
   }
 
-  .bg-grid {
+  .bg {
     position: fixed;
     inset: 0;
-    background-image: 
-      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
     z-index: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 20%, rgba(99,102,241,0.07), transparent),
+      radial-gradient(ellipse 500px 500px at 80% 80%, rgba(236,72,153,0.05), transparent);
+  }
+
+  /* Puzzle piece rain */
+  .puzzle-rain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .puzzle-piece {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0.06;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-40px) rotate(0deg); }
+    100% { transform: translateY(105vh) rotate(360deg); }
   }
 
   .container {
     position: relative;
     z-index: 1;
-    max-width: 560px;
-    width: 90%;
-    padding: 2.5rem;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-top: 2rem;
+  }
+
+  .header-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.8rem;
+    display: block;
   }
 
   h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #818cf8, #c084fc);
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, #f472b6, #818cf8, #34d399);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .subtitle {
-    text-align: center;
     color: #6b7280;
-    font-size: 0.85rem;
-    margin-bottom: 2.5rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 
+  .subtitle span {
+    color: #9ca3af;
+  }
+
+  /* Progress */
+  .progress-wrap {
+    margin-bottom: 2rem;
+  }
+  .progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #ec4899);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-label {
+    font-size: 0.7rem;
+    color: #4b5563;
+    margin-top: 0.4rem;
+    text-align: right;
+  }
+
+  /* Question cards */
   .question-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 1.8rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 2rem;
     margin-bottom: 1.2rem;
     transition: all 0.3s;
   }
-
-  .question-card:hover {
-    border-color: rgba(129, 140, 248, 0.2);
+  .question-card.answered {
+    border-color: rgba(99, 102, 241, 0.15);
+    background: rgba(99, 102, 241, 0.02);
   }
 
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .q-icon {
+    font-size: 1.5rem;
+  }
   .q-number {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #818cf8;
-    margin-bottom: 0.6rem;
+    color: #6366f1;
   }
 
   .q-text {
-    font-size: 1.05rem;
-    font-weight: 600;
-    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.3rem;
     line-height: 1.4;
   }
 
@@ -91,71 +156,71 @@
 
   .option {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
-    padding: 0.7rem 1rem;
-    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s;
-    border: 1px solid transparent;
+    border: 1px solid rgba(255,255,255,0.04);
   }
-
   .option:hover {
+    background: rgba(129, 140, 248, 0.06);
+    border-color: rgba(129, 140, 248, 0.1);
+  }
+  .option.selected {
     background: rgba(129, 140, 248, 0.08);
+    border-color: rgba(129, 140, 248, 0.2);
   }
 
   .option input { display: none; }
 
-  .option .radio {
+  .radio {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #4b5563;
+    border: 2px solid #374151;
     transition: all 0.2s;
     flex-shrink: 0;
-    position: relative;
+    margin-top: 2px;
   }
-
-  .option input:checked ~ .radio {
+  .option.selected .radio {
     border-color: #818cf8;
     background: #818cf8;
     box-shadow: inset 0 0 0 3px #0a0a0f;
   }
 
-  .option input:checked ~ .label {
-    color: #fff;
-  }
-
   .label {
     font-size: 0.9rem;
     color: #9ca3af;
+    line-height: 1.4;
     transition: color 0.2s;
   }
+  .option.selected .label { color: #e0e0e0; }
 
+  /* Submit */
   .btn {
     display: block;
     width: 100%;
-    margin-top: 1.5rem;
-    padding: 1rem;
+    margin-top: 2rem;
+    padding: 1.1rem;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.05rem;
+    font-weight: 700;
     cursor: pointer;
-    background: linear-gradient(135deg, #6366f1, #a855f7);
+    background: linear-gradient(135deg, #6366f1, #ec4899);
     color: #fff;
     transition: all 0.3s;
     letter-spacing: 0.5px;
   }
-
   .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25);
   }
-
   .btn:disabled {
-    opacity: 0.3;
+    opacity: 0.2;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -165,196 +230,308 @@
   .result {
     display: none;
     text-align: center;
-    padding: 2rem 0;
+    padding: 3rem 0 2rem;
   }
 
   .result-emoji {
     font-size: 5rem;
-    margin-bottom: 1rem;
-    animation: pop 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    margin-bottom: 1.2rem;
+    animation: pop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
-
   @keyframes pop {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
+    0% { transform: scale(0) rotate(-20deg); }
+    100% { transform: scale(1) rotate(0deg); }
   }
 
   .result-title {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #f472b6, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .result-desc {
     color: #9ca3af;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 2rem;
     font-size: 0.95rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .score-bar-bg {
+  .meter {
+    max-width: 300px;
+    margin: 0 auto 0.5rem;
+  }
+  .meter-bg {
     width: 100%;
-    height: 8px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 4px;
+    height: 10px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
     overflow: hidden;
-    margin-bottom: 0.5rem;
   }
-
-  .score-bar {
+  .meter-fill {
     height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, #6366f1, #a855f7);
-    transition: width 1s ease;
+    border-radius: 5px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
     width: 0%;
   }
-
-  .score-label {
-    font-size: 0.8rem;
-    color: #6b7280;
-  }
-
-  .disclaimer {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    font-size: 0.7rem;
+  .meter-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
     color: #4b5563;
-    text-align: center;
-    line-height: 1.5;
+    margin-top: 0.3rem;
   }
 
-  .retry-btn {
-    margin-top: 1.5rem;
-    padding: 0.6rem 2rem;
-    border: 1px solid rgba(129, 140, 248, 0.3);
+  .share-row {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .share-btn {
+    padding: 0.6rem 1.4rem;
     border-radius: 10px;
-    background: transparent;
-    color: #818cf8;
     font-family: inherit;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    border: none;
+  }
+  .share-btn.retry {
+    background: transparent;
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    color: #818cf8;
+  }
+  .share-btn.retry:hover { background: rgba(129,140,248,0.1); }
+  .share-btn.copy {
+    background: rgba(236,72,153,0.1);
+    color: #f472b6;
+    border: 1px solid rgba(236,72,153,0.2);
+  }
+  .share-btn.copy:hover { background: rgba(236,72,153,0.2); }
+
+  .disclaimer {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.72rem;
+    color: #4b5563;
+    text-align: center;
+    line-height: 1.6;
   }
 
-  .retry-btn:hover {
-    background: rgba(129, 140, 248, 0.1);
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1f2937;
+    color: #e0e0e0;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    z-index: 99;
+    transition: transform 0.3s;
+    border: 1px solid rgba(255,255,255,0.08);
   }
-
-  #quiz { transition: opacity 0.3s; }
+  .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-<div class="bg-grid"></div>
+<div class="bg"></div>
+<div class="puzzle-rain" id="rain"></div>
 <div class="container">
   <div id="quiz">
-    <h1>🧩 Are You Autistic?</h1>
-    <p class="subtitle">The world's least scientific 3-question assessment</p>
+    <div class="header">
+      <span class="header-emoji">🧩</span>
+      <h1>The Tism Test</h1>
+      <p class="subtitle">
+        You peaked on the russebuss. Now you peak in ranked.<br>
+        <span>3 questions. 0 scientific validity. Let's find out.</span>
+      </p>
+    </div>
 
-    <div class="question-card">
-      <div class="q-number">Question 01</div>
-      <div class="q-text">Someone changes the plan last minute. Your reaction?</div>
+    <div class="progress-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar" id="progress"></div></div>
+      <div class="progress-label" id="progress-label">0 / 3</div>
+    </div>
+
+    <div class="question-card" id="card1">
+      <div class="q-header">
+        <span class="q-icon">🎮</span>
+        <span class="q-number">Question 01</span>
+      </div>
+      <div class="q-text">The boys are finally online. What's the move?</div>
       <div class="options">
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q1" value="0">
           <span class="radio"></span>
-          <span class="label">No worries, I'll go with the flow 🏄</span>
+          <span class="label">Whatever everyone else wants to play, I'm easy 🤷</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q1" value="1">
           <span class="radio"></span>
-          <span class="label">Mildly annoyed but I'll deal 😤</span>
+          <span class="label">I suggest the game but I'm flexible if they want something else 🎯</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q1" value="2">
           <span class="radio"></span>
-          <span class="label">My entire day is now ruined and I need 20 minutes alone 💀</span>
+          <span class="label">I've been waiting all day to play ONE specific game and if they pick something else I'll play but I won't enjoy it 😤</span>
+        </label>
+        <label class="option" onclick="pick(this)">
+          <input type="radio" name="q1" value="3">
+          <span class="radio"></span>
+          <span class="label">I'm already in a solo queue grinding ranked. They can spectate 👑</span>
         </label>
       </div>
     </div>
 
-    <div class="question-card">
-      <div class="q-number">Question 02</div>
-      <div class="q-text">You discover a new topic that interests you. What happens next?</div>
+    <div class="question-card" id="card2">
+      <div class="q-header">
+        <span class="q-icon">🚌</span>
+        <span class="q-number">Question 02</span>
+      </div>
+      <div class="q-text">Flashback to russ. What was your actual role on the bus?</div>
       <div class="options">
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q2" value="0">
           <span class="radio"></span>
-          <span class="label">Cool, I'll check it out sometime 👀</span>
+          <span class="label">I was just vibing, talking to everyone, living my best life 🎉</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q2" value="1">
           <span class="radio"></span>
-          <span class="label">I spend the evening reading about it 📖</span>
+          <span class="label">I handled the music/aux because nobody else had good taste 🎵</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q2" value="2">
           <span class="radio"></span>
-          <span class="label">It's 4 AM and I've opened 47 browser tabs. I now know more than most professionals 🔬</span>
+          <span class="label">I ran the budget spreadsheet and logistics. Someone had to 📊</span>
+        </label>
+        <label class="option" onclick="pick(this)">
+          <input type="radio" name="q2" value="3">
+          <span class="radio"></span>
+          <span class="label">I designed the entire bus wrap, built the speaker system, and had a Gantt chart for russeknuter 🔧</span>
         </label>
       </div>
     </div>
 
-    <div class="question-card">
-      <div class="q-number">Question 03</div>
-      <div class="q-text">At a party, you find yourself...</div>
+    <div class="question-card" id="card3">
+      <div class="q-header">
+        <span class="q-icon">🧠</span>
+        <span class="q-number">Question 03</span>
+      </div>
+      <div class="q-text">You discover a new interest. Be honest. What happens?</div>
       <div class="options">
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q3" value="0">
           <span class="radio"></span>
-          <span class="label">Working the room, vibing with everyone 🎉</span>
+          <span class="label">I check it out casually, maybe watch a YouTube video 📱</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q3" value="1">
           <span class="radio"></span>
-          <span class="label">Talking to 1-2 people about something specific 🗣️</span>
+          <span class="label">I spend the evening going down a rabbit hole, then move on 🐇</span>
         </label>
-        <label class="option">
+        <label class="option" onclick="pick(this)">
           <input type="radio" name="q3" value="2">
           <span class="radio"></span>
-          <span class="label">Petting the host's cat in a quiet room, wondering when it's acceptable to leave 🐱</span>
+          <span class="label">It's 4 AM, I've read the entire subreddit, watched 30 videos, and I'm now correcting people in the comments 🌙</span>
+        </label>
+        <label class="option" onclick="pick(this)">
+          <input type="radio" name="q3" value="3">
+          <span class="radio"></span>
+          <span class="label">I am now building a spreadsheet/app/wiki about it. This is my life for the next 3 weeks minimum 💀</span>
         </label>
       </div>
     </div>
 
-    <button class="btn" id="submit-btn" disabled>Diagnose Me</button>
+    <button class="btn" id="submit-btn" disabled onclick="showResult()">Diagnose Me 🧩</button>
   </div>
 
   <div class="result" id="result">
     <div class="result-emoji" id="result-emoji"></div>
     <div class="result-title" id="result-title"></div>
     <div class="result-desc" id="result-desc"></div>
-    <div class="score-bar-bg"><div class="score-bar" id="score-bar"></div></div>
-    <div class="score-label" id="score-label"></div>
-    <button class="retry-btn" onclick="location.reload()">Try Again</button>
-    <div class="disclaimer">⚠️ This is a joke. This quiz has zero scientific validity. If you genuinely suspect you might be on the spectrum, talk to an actual professional, not a website made by an AI at 11 PM.</div>
+    <div class="meter">
+      <div class="meter-bg"><div class="meter-fill" id="meter-fill"></div></div>
+      <div class="meter-labels"><span>Neurotypical</span><span>Turbotist</span></div>
+    </div>
+    <div class="share-row">
+      <button class="share-btn retry" onclick="location.reload()">🔁 Retake</button>
+      <button class="share-btn copy" onclick="copyResult()">📋 Copy Result</button>
+    </div>
+    <div class="disclaimer">
+      ⚠️ This is satire. Zero scientific validity. If you genuinely think you might be on the spectrum, talk to a real professional (fastlege → DPS). Not a quiz made by an AI while your boy was procrastinating.
+    </div>
   </div>
 </div>
 
+<div class="toast" id="toast">Copied to clipboard ✓</div>
+
 <script>
-const btn = document.getElementById('submit-btn');
-const radios = document.querySelectorAll('input[type="radio"]');
+// Puzzle rain
+const rain = document.getElementById('rain');
+const pieces = ['🧩','🧩','🧩','♾️','🧩'];
+for (let i = 0; i < 20; i++) {
+  const el = document.createElement('span');
+  el.className = 'puzzle-piece';
+  el.textContent = pieces[i % pieces.length];
+  el.style.left = Math.random() * 100 + '%';
+  el.style.animationDuration = (8 + Math.random() * 12) + 's';
+  el.style.animationDelay = -(Math.random() * 20) + 's';
+  el.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
+  rain.appendChild(el);
+}
+
 const answered = new Set();
+const btn = document.getElementById('submit-btn');
+const progress = document.getElementById('progress');
+const progressLabel = document.getElementById('progress-label');
 
-radios.forEach(r => r.addEventListener('change', () => {
-  answered.add(r.name);
-  btn.disabled = answered.size < 3;
-}));
+function pick(el) {
+  const card = el.closest('.question-card');
+  card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  card.classList.add('answered');
+  
+  answered.add(el.querySelector('input').name);
+  const count = answered.size;
+  progress.style.width = (count / 3 * 100) + '%';
+  progressLabel.textContent = count + ' / 3';
+  btn.disabled = count < 3;
+}
 
-btn.addEventListener('click', () => {
+let resultText = '';
+
+function showResult() {
   const score = ['q1','q2','q3'].reduce((s, q) => 
     s + parseInt(document.querySelector(`input[name="${q}"]:checked`).value), 0);
   
+  const pct = Math.round((score / 9) * 100);
+  
   const results = [
-    { min: 0, max: 1, emoji: '😎', title: 'Neurotypical AF', desc: 'You\'re the person who actually enjoys small talk and can handle surprise plans. The algorithm has spoken: you\'re aggressively normal. Congratulations?' },
-    { min: 2, max: 3, emoji: '🤔', title: 'Suspiciously Normal', desc: 'You scored in the "could go either way" zone. You probably have a color-coded calendar but can still make eye contact. The spectrum is waving at you from across the room.' },
-    { min: 4, max: 5, emoji: '🧩', title: 'Autistic Tendencies Detected', desc: 'The signs are there. You\'ve definitely info-dumped on someone who didn\'t ask, and you own noise-cancelling headphones that you consider a medical device.' },
-    { min: 6, max: 6, emoji: '🏆', title: 'Maximum Autism Achieved', desc: 'You scored a perfect 6/6. You probably already suspected this. You\'ve memorized the DSM-5 criteria, ranked your special interests by intensity, and you\'re now wondering if this quiz\'s font choice was intentional.' }
+    { min: 0, max: 2, emoji: '😎', title: 'Neurotypical King', desc: 'You went with the flow on the bus, you go with the flow in life. You\'re the guy who actually enjoys afterparties and remembers people\'s names. The tism has not claimed you. Yet.', color: '#34d399' },
+    { min: 3, max: 4, emoji: '🤔', title: 'Suspiciously Normal', desc: 'You pass as NT but something\'s off. You had a "role" on the bus that was a bit too organized. You have opinions about headphone brands. You\'ve said "I just like systems" without irony.', color: '#fbbf24' },
+    { min: 5, max: 6, emoji: '🧩', title: 'The Tism Is Strong', desc: 'Brother, you ran the russebuss budget in Excel and you know your Elo rating to the decimal. You\'ve been mask-on since VGS. Your Spotify Wrapped is just one genre. Embrace it.', color: '#f472b6' },
+    { min: 7, max: 9, emoji: '♾️', title: 'Certified Turbotist', desc: 'You scored maximum tism. You built the bus speaker system with a wiring diagram. You have 2000+ hours in one game. You\'ve explained something "real quick" for 45 minutes. You don\'t have autism, autism has you. Welcome home.', color: '#818cf8' }
   ];
 
   const r = results.find(r => score >= r.min && score <= r.max);
+  resultText = `🧩 The Tism Test Result: ${r.title} (${pct}% autistic)\nTake the test: autism.eilif.dev`;
   
   document.getElementById('quiz').style.opacity = '0';
+  document.getElementById('quiz').style.transition = 'opacity 0.3s';
   setTimeout(() => {
     document.getElementById('quiz').style.display = 'none';
     const res = document.getElementById('result');
@@ -362,12 +539,22 @@ btn.addEventListener('click', () => {
     document.getElementById('result-emoji').textContent = r.emoji;
     document.getElementById('result-title').textContent = r.title;
     document.getElementById('result-desc').textContent = r.desc;
-    document.getElementById('score-label').textContent = `${score}/6 on the autism scale`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
-      document.getElementById('score-bar').style.width = `${(score/6)*100}%`;
-    }, 100);
+      const fill = document.getElementById('meter-fill');
+      fill.style.width = pct + '%';
+      fill.style.background = `linear-gradient(90deg, #34d399, ${r.color})`;
+    }, 200);
   }, 300);
-});
+}
+
+function copyResult() {
+  navigator.clipboard.writeText(resultText).then(() => {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  });
+}
 </script>
 </body>
 </html>

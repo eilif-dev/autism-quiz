@@ -26,7 +26,6 @@
       radial-gradient(ellipse 500px 500px at 80% 80%, rgba(236,72,153,0.05), transparent);
   }
 
-  /* Puzzle piece rain */
   .puzzle-rain {
     position: fixed;
     inset: 0;
@@ -53,19 +52,12 @@
     padding: 2rem 1.2rem 4rem;
   }
 
-  /* Header */
   .header {
     text-align: center;
     margin-bottom: 2.5rem;
     padding-top: 2rem;
   }
-
-  .header-emoji {
-    font-size: 4rem;
-    margin-bottom: 0.8rem;
-    display: block;
-  }
-
+  .header-emoji { font-size: 4rem; margin-bottom: 0.8rem; display: block; }
   h1 {
     font-size: 2.4rem;
     font-weight: 800;
@@ -75,43 +67,14 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  .subtitle { color: #6b7280; font-size: 0.9rem; line-height: 1.5; }
+  .subtitle span { color: #9ca3af; }
 
-  .subtitle {
-    color: #6b7280;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
+  .progress-wrap { margin-bottom: 2rem; position: sticky; top: 0; z-index: 10; background: #050508; padding: 0.8rem 0; }
+  .progress-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+  .progress-bar { height: 100%; background: linear-gradient(90deg, #6366f1, #ec4899); border-radius: 2px; transition: width 0.5s ease; width: 0%; }
+  .progress-label { font-size: 0.7rem; color: #4b5563; margin-top: 0.4rem; text-align: right; }
 
-  .subtitle span {
-    color: #9ca3af;
-  }
-
-  /* Progress */
-  .progress-wrap {
-    margin-bottom: 2rem;
-  }
-  .progress-bar-bg {
-    width: 100%;
-    height: 4px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #6366f1, #ec4899);
-    border-radius: 2px;
-    transition: width 0.5s ease;
-    width: 0%;
-  }
-  .progress-label {
-    font-size: 0.7rem;
-    color: #4b5563;
-    margin-top: 0.4rem;
-    text-align: right;
-  }
-
-  /* Question cards */
   .question-card {
     background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.05);
@@ -125,224 +88,55 @@
     background: rgba(99, 102, 241, 0.02);
   }
 
-  .q-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .q-icon {
-    font-size: 1.5rem;
-  }
-  .q-number {
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #6366f1;
-  }
+  .q-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .q-icon { font-size: 1.5rem; }
+  .q-number { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; color: #6366f1; }
+  .q-text { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.3rem; line-height: 1.4; }
 
-  .q-text {
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 1.3rem;
-    line-height: 1.4;
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
   .option {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid rgba(255,255,255,0.04);
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.8rem 1rem; border-radius: 12px; cursor: pointer;
+    transition: all 0.2s; border: 1px solid rgba(255,255,255,0.04);
   }
-  .option:hover {
-    background: rgba(129, 140, 248, 0.06);
-    border-color: rgba(129, 140, 248, 0.1);
-  }
-  .option.selected {
-    background: rgba(129, 140, 248, 0.08);
-    border-color: rgba(129, 140, 248, 0.2);
-  }
-
+  .option:hover { background: rgba(129, 140, 248, 0.06); border-color: rgba(129, 140, 248, 0.1); }
+  .option.selected { background: rgba(129, 140, 248, 0.08); border-color: rgba(129, 140, 248, 0.2); }
   .option input { display: none; }
-
-  .radio {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid #374151;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .option.selected .radio {
-    border-color: #818cf8;
-    background: #818cf8;
-    box-shadow: inset 0 0 0 3px #0a0a0f;
-  }
-
-  .label {
-    font-size: 0.9rem;
-    color: #9ca3af;
-    line-height: 1.4;
-    transition: color 0.2s;
-  }
+  .radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #374151; transition: all 0.2s; flex-shrink: 0; margin-top: 2px; }
+  .option.selected .radio { border-color: #818cf8; background: #818cf8; box-shadow: inset 0 0 0 3px #0a0a0f; }
+  .label { font-size: 0.9rem; color: #9ca3af; line-height: 1.4; transition: color 0.2s; }
   .option.selected .label { color: #e0e0e0; }
 
-  /* Submit */
   .btn {
-    display: block;
-    width: 100%;
-    margin-top: 2rem;
-    padding: 1.1rem;
-    border: none;
-    border-radius: 14px;
-    font-family: inherit;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-    background: linear-gradient(135deg, #6366f1, #ec4899);
-    color: #fff;
-    transition: all 0.3s;
-    letter-spacing: 0.5px;
+    display: block; width: 100%; margin-top: 2rem; padding: 1.1rem; border: none;
+    border-radius: 14px; font-family: inherit; font-size: 1.05rem; font-weight: 700;
+    cursor: pointer; background: linear-gradient(135deg, #6366f1, #ec4899);
+    color: #fff; transition: all 0.3s; letter-spacing: 0.5px;
   }
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25);
-  }
-  .btn:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25); }
+  .btn:disabled { opacity: 0.2; cursor: not-allowed; transform: none; box-shadow: none; }
 
-  /* Result */
-  .result {
-    display: none;
-    text-align: center;
-    padding: 3rem 0 2rem;
-  }
+  .result { display: none; text-align: center; padding: 3rem 0 2rem; }
+  .result-emoji { font-size: 5rem; margin-bottom: 1.2rem; animation: pop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
+  @keyframes pop { 0% { transform: scale(0) rotate(-20deg); } 100% { transform: scale(1) rotate(0deg); } }
+  .result-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #f472b6, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .result-desc { color: #9ca3af; line-height: 1.7; margin-bottom: 2rem; font-size: 0.95rem; max-width: 480px; margin-left: auto; margin-right: auto; }
 
-  .result-emoji {
-    font-size: 5rem;
-    margin-bottom: 1.2rem;
-    animation: pop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  }
-  @keyframes pop {
-    0% { transform: scale(0) rotate(-20deg); }
-    100% { transform: scale(1) rotate(0deg); }
-  }
+  .meter { max-width: 300px; margin: 0 auto 0.5rem; }
+  .meter-bg { width: 100%; height: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; overflow: hidden; }
+  .meter-fill { height: 100%; border-radius: 5px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
+  .meter-labels { display: flex; justify-content: space-between; font-size: 0.65rem; color: #4b5563; margin-top: 0.3rem; }
 
-  .result-title {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #f472b6, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .result-desc {
-    color: #9ca3af;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .meter {
-    max-width: 300px;
-    margin: 0 auto 0.5rem;
-  }
-  .meter-bg {
-    width: 100%;
-    height: 10px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  .meter-fill {
-    height: 100%;
-    border-radius: 5px;
-    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 0%;
-  }
-  .meter-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.65rem;
-    color: #4b5563;
-    margin-top: 0.3rem;
-  }
-
-  .share-row {
-    margin-top: 2rem;
-    display: flex;
-    gap: 0.8rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .share-btn {
-    padding: 0.6rem 1.4rem;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: none;
-  }
-  .share-btn.retry {
-    background: transparent;
-    border: 1px solid rgba(129, 140, 248, 0.3);
-    color: #818cf8;
-  }
+  .share-row { margin-top: 2rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+  .share-btn { padding: 0.6rem 1.4rem; border-radius: 10px; font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+  .share-btn.retry { background: transparent; border: 1px solid rgba(129, 140, 248, 0.3); color: #818cf8; }
   .share-btn.retry:hover { background: rgba(129,140,248,0.1); }
-  .share-btn.copy {
-    background: rgba(236,72,153,0.1);
-    color: #f472b6;
-    border: 1px solid rgba(236,72,153,0.2);
-  }
+  .share-btn.copy { background: rgba(236,72,153,0.1); color: #f472b6; border: 1px solid rgba(236,72,153,0.2); }
   .share-btn.copy:hover { background: rgba(236,72,153,0.2); }
 
-  .disclaimer {
-    margin-top: 3rem;
-    padding: 1.5rem;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.72rem;
-    color: #4b5563;
-    text-align: center;
-    line-height: 1.6;
-  }
+  .disclaimer { margin-top: 3rem; padding: 1.5rem; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); font-size: 0.72rem; color: #4b5563; text-align: center; line-height: 1.6; }
 
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #1f2937;
-    color: #e0e0e0;
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    z-index: 99;
-    transition: transform 0.3s;
-    border: 1px solid rgba(255,255,255,0.08);
-  }
+  .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: #1f2937; color: #e0e0e0; padding: 0.8rem 1.5rem; border-radius: 10px; font-size: 0.85rem; z-index: 99; transition: transform 0.3s; border: 1px solid rgba(255,255,255,0.08); }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
@@ -356,102 +150,120 @@
       <h1>The Tism Test</h1>
       <p class="subtitle">
         You peaked on the russebuss. Now you peak in ranked.<br>
-        <span>3 questions. 0 scientific validity. Let's find out.</span>
+        <span>9 questions. 0 scientific validity. Full send.</span>
       </p>
     </div>
 
     <div class="progress-wrap">
       <div class="progress-bar-bg"><div class="progress-bar" id="progress"></div></div>
-      <div class="progress-label" id="progress-label">0 / 3</div>
+      <div class="progress-label" id="progress-label">0 / 9</div>
     </div>
 
-    <div class="question-card" id="card1">
-      <div class="q-header">
-        <span class="q-icon">🎮</span>
-        <span class="q-number">Question 01</span>
-      </div>
+    <!-- Q1 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🎮</span><span class="q-number">Question 01</span></div>
       <div class="q-text">The boys are finally online. What's the move?</div>
       <div class="options">
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q1" value="0">
-          <span class="radio"></span>
-          <span class="label">Whatever everyone else wants to play, I'm easy 🤷</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q1" value="1">
-          <span class="radio"></span>
-          <span class="label">I suggest the game but I'm flexible if they want something else 🎯</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q1" value="2">
-          <span class="radio"></span>
-          <span class="label">I've been waiting all day to play ONE specific game and if they pick something else I'll play but I won't enjoy it 😤</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q1" value="3">
-          <span class="radio"></span>
-          <span class="label">I'm already in a solo queue grinding ranked. They can spectate 👑</span>
-        </label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q1" value="0"><span class="radio"></span><span class="label">Whatever everyone else wants, I'm easy 🤷</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q1" value="1"><span class="radio"></span><span class="label">I suggest a game but flex if they want something else 🎯</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q1" value="2"><span class="radio"></span><span class="label">I've been waiting all day to play ONE specific game and if they pick something else I'll join but won't enjoy it 😤</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q1" value="3"><span class="radio"></span><span class="label">Already solo queueing ranked. They can spectate 👑</span></label>
       </div>
     </div>
 
-    <div class="question-card" id="card2">
-      <div class="q-header">
-        <span class="q-icon">🚌</span>
-        <span class="q-number">Question 02</span>
-      </div>
+    <!-- Q2 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🚌</span><span class="q-number">Question 02</span></div>
       <div class="q-text">Flashback to russ. What was your actual role on the bus?</div>
       <div class="options">
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q2" value="0">
-          <span class="radio"></span>
-          <span class="label">I was just vibing, talking to everyone, living my best life 🎉</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q2" value="1">
-          <span class="radio"></span>
-          <span class="label">I handled the music/aux because nobody else had good taste 🎵</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q2" value="2">
-          <span class="radio"></span>
-          <span class="label">I ran the budget spreadsheet and logistics. Someone had to 📊</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q2" value="3">
-          <span class="radio"></span>
-          <span class="label">I designed the entire bus wrap, built the speaker system, and had a Gantt chart for russeknuter 🔧</span>
-        </label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q2" value="0"><span class="radio"></span><span class="label">Just vibing, talking to everyone, living my best life 🎉</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q2" value="1"><span class="radio"></span><span class="label">I handled the aux because nobody else had taste 🎵</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q2" value="2"><span class="radio"></span><span class="label">I ran the budget spreadsheet and logistics. Someone had to 📊</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q2" value="3"><span class="radio"></span><span class="label">I designed the bus wrap, built the speaker system, and had a Gantt chart for russeknuter 🔧</span></label>
       </div>
     </div>
 
-    <div class="question-card" id="card3">
-      <div class="q-header">
-        <span class="q-icon">🧠</span>
-        <span class="q-number">Question 03</span>
-      </div>
-      <div class="q-text">You discover a new interest. Be honest. What happens?</div>
+    <!-- Q3 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🧠</span><span class="q-number">Question 03</span></div>
+      <div class="q-text">You discover a new interest. Be honest.</div>
       <div class="options">
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q3" value="0">
-          <span class="radio"></span>
-          <span class="label">I check it out casually, maybe watch a YouTube video 📱</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q3" value="1">
-          <span class="radio"></span>
-          <span class="label">I spend the evening going down a rabbit hole, then move on 🐇</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q3" value="2">
-          <span class="radio"></span>
-          <span class="label">It's 4 AM, I've read the entire subreddit, watched 30 videos, and I'm now correcting people in the comments 🌙</span>
-        </label>
-        <label class="option" onclick="pick(this)">
-          <input type="radio" name="q3" value="3">
-          <span class="radio"></span>
-          <span class="label">I am now building a spreadsheet/app/wiki about it. This is my life for the next 3 weeks minimum 💀</span>
-        </label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q3" value="0"><span class="radio"></span><span class="label">Check it out casually, maybe watch a YouTube video 📱</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q3" value="1"><span class="radio"></span><span class="label">Spend the evening going down a rabbit hole, then move on 🐇</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q3" value="2"><span class="radio"></span><span class="label">It's 4 AM, I've read the entire subreddit and I'm correcting people in the comments 🌙</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q3" value="3"><span class="radio"></span><span class="label">I'm building a spreadsheet/app/wiki about it. This is my life for the next 3 weeks 💀</span></label>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🍕</span><span class="q-number">Question 04</span></div>
+      <div class="q-text">Friday night. The group chat is deciding where to eat. You...</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q4" value="0"><span class="radio"></span><span class="label">Down for anything, surprise me 🎲</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q4" value="1"><span class="radio"></span><span class="label">I have a preference but I'll compromise 🤝</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q4" value="2"><span class="radio"></span><span class="label">I always go to the same 2-3 places because I know exactly what to order there 🔄</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q4" value="3"><span class="radio"></span><span class="label">New restaurant? I need to check the menu online first. If it's not on Google Maps with 4+ stars I'm not going 🔍</span></label>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🎧</span><span class="q-number">Question 05</span></div>
+      <div class="q-text">Your relationship with noise-cancelling headphones:</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q5" value="0"><span class="radio"></span><span class="label">I have some, use them on flights I guess 🛫</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q5" value="1"><span class="radio"></span><span class="label">I wear them daily, music just hits better 🎶</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q5" value="2"><span class="radio"></span><span class="label">I wear them without music. The silence is the point 🤫</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q5" value="3"><span class="radio"></span><span class="label">I own multiple pairs, have researched dB reduction specs, and feel physical distress when I forget them 🆘</span></label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">📅</span><span class="q-number">Question 06</span></div>
+      <div class="q-text">Plans change last minute. Someone cancels and now the whole evening is different.</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q6" value="0"><span class="radio"></span><span class="label">All good, we'll figure something out 🏄</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q6" value="1"><span class="radio"></span><span class="label">A bit annoyed but I adapt quickly 😅</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q6" value="2"><span class="radio"></span><span class="label">I need like 30 minutes to mentally recalibrate. Don't talk to me yet 🔄</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q6" value="3"><span class="radio"></span><span class="label">My evening is destroyed. I had mentally rehearsed the exact sequence of events. I'm going home 🚪</span></label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">💬</span><span class="q-number">Question 07</span></div>
+      <div class="q-text">Someone at a party asks "so what do you do?" You:</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q7" value="0"><span class="radio"></span><span class="label">Normal answer, then ask them back. Easy conversation 🗣️</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q7" value="1"><span class="radio"></span><span class="label">Give a short answer, then steer it to something more interesting 🎯</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q7" value="2"><span class="radio"></span><span class="label">Accidentally go way too deep into a niche topic and watch their eyes glaze over 👁️</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q7" value="3"><span class="radio"></span><span class="label">I'm not at the party. Or if I am, I'm in the corner explaining crypto/keyboards/trains to someone who made the mistake of asking 🧱</span></label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🛒</span><span class="q-number">Question 08</span></div>
+      <div class="q-text">Grocery shopping. Your approach:</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q8" value="0"><span class="radio"></span><span class="label">Walk in, grab what looks good, figure it out at home 🛍️</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q8" value="1"><span class="radio"></span><span class="label">Quick mental list, in and out, efficient enough 📝</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q8" value="2"><span class="radio"></span><span class="label">Same route through the store every time. If they rearrange the shelves I get irrationally upset 😠</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q8" value="3"><span class="radio"></span><span class="label">I have a list sorted by aisle order and I track prices per kilo across Rema, Kiwi, and Meny in a spreadsheet 📊</span></label>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="question-card">
+      <div class="q-header"><span class="q-icon">🏠</span><span class="q-number">Question 09</span></div>
+      <div class="q-text">You get home after socializing for hours. What's the recovery protocol?</div>
+      <div class="options">
+        <label class="option" onclick="pick(this)"><input type="radio" name="q9" value="0"><span class="radio"></span><span class="label">Recovery? I could keep going honestly 🔋</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q9" value="1"><span class="radio"></span><span class="label">Chill on the couch for a bit, watch something, normal evening 📺</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q9" value="2"><span class="radio"></span><span class="label">Headphones on, lights off, don't touch me for at least an hour. My social battery is at 0% 🪫</span></label>
+        <label class="option" onclick="pick(this)"><input type="radio" name="q9" value="3"><span class="radio"></span><span class="label">I decompress by doing my Comfort Activity in complete silence for 2-3 hours while mentally replaying every conversation I had to check if I was weird 🔁</span></label>
       </div>
     </div>
 
@@ -471,7 +283,7 @@
       <button class="share-btn copy" onclick="copyResult()">📋 Copy Result</button>
     </div>
     <div class="disclaimer">
-      ⚠️ This is satire. Zero scientific validity. If you genuinely think you might be on the spectrum, talk to a real professional (fastlege → DPS). Not a quiz made by an AI while your boy was procrastinating.
+      ⚠️ This is satire. Zero scientific validity. If you genuinely think you might be on the spectrum, talk to a real professional (fastlege &rarr; DPS). Not a quiz made by an AI while your boy was procrastinating.
     </div>
   </div>
 </div>
@@ -479,10 +291,10 @@
 <div class="toast" id="toast">Copied to clipboard ✓</div>
 
 <script>
-// Puzzle rain
+const TOTAL = 9;
 const rain = document.getElementById('rain');
 const pieces = ['🧩','🧩','🧩','♾️','🧩'];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 25; i++) {
   const el = document.createElement('span');
   el.className = 'puzzle-piece';
   el.textContent = pieces[i % pieces.length];
@@ -504,32 +316,32 @@ function pick(el) {
   el.classList.add('selected');
   el.querySelector('input').checked = true;
   card.classList.add('answered');
-  
   answered.add(el.querySelector('input').name);
   const count = answered.size;
-  progress.style.width = (count / 3 * 100) + '%';
-  progressLabel.textContent = count + ' / 3';
-  btn.disabled = count < 3;
+  progress.style.width = (count / TOTAL * 100) + '%';
+  progressLabel.textContent = count + ' / ' + TOTAL;
+  btn.disabled = count < TOTAL;
 }
 
 let resultText = '';
 
 function showResult() {
-  const score = ['q1','q2','q3'].reduce((s, q) => 
-    s + parseInt(document.querySelector(`input[name="${q}"]:checked`).value), 0);
-  
-  const pct = Math.round((score / 9) * 100);
-  
+  const qs = Array.from({length: TOTAL}, (_, i) => 'q' + (i + 1));
+  const score = qs.reduce((s, q) => s + parseInt(document.querySelector(`input[name="${q}"]:checked`).value), 0);
+  const maxScore = TOTAL * 3;
+  const pct = Math.round((score / maxScore) * 100);
+
   const results = [
-    { min: 0, max: 2, emoji: '😎', title: 'Neurotypical King', desc: 'You went with the flow on the bus, you go with the flow in life. You\'re the guy who actually enjoys afterparties and remembers people\'s names. The tism has not claimed you. Yet.', color: '#34d399' },
-    { min: 3, max: 4, emoji: '🤔', title: 'Suspiciously Normal', desc: 'You pass as NT but something\'s off. You had a "role" on the bus that was a bit too organized. You have opinions about headphone brands. You\'ve said "I just like systems" without irony.', color: '#fbbf24' },
-    { min: 5, max: 6, emoji: '🧩', title: 'The Tism Is Strong', desc: 'Brother, you ran the russebuss budget in Excel and you know your Elo rating to the decimal. You\'ve been mask-on since VGS. Your Spotify Wrapped is just one genre. Embrace it.', color: '#f472b6' },
-    { min: 7, max: 9, emoji: '♾️', title: 'Certified Turbotist', desc: 'You scored maximum tism. You built the bus speaker system with a wiring diagram. You have 2000+ hours in one game. You\'ve explained something "real quick" for 45 minutes. You don\'t have autism, autism has you. Welcome home.', color: '#818cf8' }
+    { min: 0, max: 5, emoji: '😎', title: 'Neurotypical King', desc: 'You went with the flow on the bus and you go with the flow in life. You remember people\'s names, enjoy small talk, and have never once organized a spreadsheet for fun. The tism has not claimed you. You\'re free. Boring, but free.', color: '#34d399' },
+    { min: 6, max: 10, emoji: '🤔', title: 'Suspiciously Normal', desc: 'You pass as NT but something\'s off. You had a "role" on the bus that was a bit too organized. You have strong opinions about headphone brands. You\'ve said "I just like efficiency" without irony. The mask is slipping, bro.', color: '#fbbf24' },
+    { min: 11, max: 16, emoji: '🧩', title: 'The Tism Is Strong', desc: 'Brother. You ran the russebuss budget in Excel and you know your Elo rating to the exact decimal. You\'ve been masking since VGS. Your Spotify Wrapped is one genre. You have a "system" for grocery shopping. The tism didn\'t choose you, but it definitely found you.', color: '#f472b6' },
+    { min: 17, max: 22, emoji: '♾️', title: 'Certified Turbotist', desc: 'You scored elite tism. You built the bus speaker system with a wiring diagram. You have 2000+ hours in one game. You\'ve explained something "real quick" for 45 minutes. You replay social situations in your head on loop. You don\'t have autism, autism has you. Welcome home.', color: '#818cf8' },
+    { min: 23, max: 27, emoji: '🏆', title: 'Final Boss of Autism', desc: 'Perfect score territory. You are the person who corrects Wikipedia articles at 3 AM. Your browser has 200+ tabs and closing them feels like loss. You\'ve built an app to solve a problem only you have. Your friends love you but they\'ve learned never to ask "how does that work?" unless they have 90 minutes free. You are the spectrum.', color: '#a855f7' },
   ];
 
   const r = results.find(r => score >= r.min && score <= r.max);
-  resultText = `🧩 The Tism Test Result: ${r.title} (${pct}% autistic)\nTake the test: autism.eilif.dev`;
-  
+  resultText = `🧩 The Tism Test: ${r.title} (${pct}%)\nautism.eilif.dev`;
+
   document.getElementById('quiz').style.opacity = '0';
   document.getElementById('quiz').style.transition = 'opacity 0.3s';
   setTimeout(() => {

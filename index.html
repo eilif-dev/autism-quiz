@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Are You Autistic? - The Definitive 3-Question Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    min-height: 100vh;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    width: 90%;
+    padding: 2.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.85rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .question-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 1.8rem;
+    margin-bottom: 1.2rem;
+    transition: all 0.3s;
+  }
+
+  .question-card:hover {
+    border-color: rgba(129, 140, 248, 0.2);
+  }
+
+  .q-number {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #818cf8;
+    margin-bottom: 0.6rem;
+  }
+
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    line-height: 1.4;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+
+  .option:hover {
+    background: rgba(129, 140, 248, 0.08);
+  }
+
+  .option input { display: none; }
+
+  .option .radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #4b5563;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .option input:checked ~ .radio {
+    border-color: #818cf8;
+    background: #818cf8;
+    box-shadow: inset 0 0 0 3px #0a0a0f;
+  }
+
+  .option input:checked ~ .label {
+    color: #fff;
+  }
+
+  .label {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    transition: color 0.2s;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.3);
+  }
+
+  .btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Result */
+  .result {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .result-emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: pop 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
+  .result-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .result-desc {
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+  }
+
+  .score-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+
+  .score-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    transition: width 1s ease;
+    width: 0%;
+  }
+
+  .score-label {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+
+  .disclaimer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.7rem;
+    color: #4b5563;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .retry-btn {
+    margin-top: 1.5rem;
+    padding: 0.6rem 2rem;
+    border: 1px solid rgba(129, 140, 248, 0.3);
+    border-radius: 10px;
+    background: transparent;
+    color: #818cf8;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .retry-btn:hover {
+    background: rgba(129, 140, 248, 0.1);
+  }
+
+  #quiz { transition: opacity 0.3s; }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+  <div id="quiz">
+    <h1>🧩 Are You Autistic?</h1>
+    <p class="subtitle">The world's least scientific 3-question assessment</p>
+
+    <div class="question-card">
+      <div class="q-number">Question 01</div>
+      <div class="q-text">Someone changes the plan last minute. Your reaction?</div>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="q1" value="0">
+          <span class="radio"></span>
+          <span class="label">No worries, I'll go with the flow 🏄</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q1" value="1">
+          <span class="radio"></span>
+          <span class="label">Mildly annoyed but I'll deal 😤</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q1" value="2">
+          <span class="radio"></span>
+          <span class="label">My entire day is now ruined and I need 20 minutes alone 💀</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-number">Question 02</div>
+      <div class="q-text">You discover a new topic that interests you. What happens next?</div>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="q2" value="0">
+          <span class="radio"></span>
+          <span class="label">Cool, I'll check it out sometime 👀</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q2" value="1">
+          <span class="radio"></span>
+          <span class="label">I spend the evening reading about it 📖</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q2" value="2">
+          <span class="radio"></span>
+          <span class="label">It's 4 AM and I've opened 47 browser tabs. I now know more than most professionals 🔬</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="question-card">
+      <div class="q-number">Question 03</div>
+      <div class="q-text">At a party, you find yourself...</div>
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="q3" value="0">
+          <span class="radio"></span>
+          <span class="label">Working the room, vibing with everyone 🎉</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q3" value="1">
+          <span class="radio"></span>
+          <span class="label">Talking to 1-2 people about something specific 🗣️</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="q3" value="2">
+          <span class="radio"></span>
+          <span class="label">Petting the host's cat in a quiet room, wondering when it's acceptable to leave 🐱</span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn" id="submit-btn" disabled>Diagnose Me</button>
+  </div>
+
+  <div class="result" id="result">
+    <div class="result-emoji" id="result-emoji"></div>
+    <div class="result-title" id="result-title"></div>
+    <div class="result-desc" id="result-desc"></div>
+    <div class="score-bar-bg"><div class="score-bar" id="score-bar"></div></div>
+    <div class="score-label" id="score-label"></div>
+    <button class="retry-btn" onclick="location.reload()">Try Again</button>
+    <div class="disclaimer">⚠️ This is a joke. This quiz has zero scientific validity. If you genuinely suspect you might be on the spectrum, talk to an actual professional, not a website made by an AI at 11 PM.</div>
+  </div>
+</div>
+
+<script>
+const btn = document.getElementById('submit-btn');
+const radios = document.querySelectorAll('input[type="radio"]');
+const answered = new Set();
+
+radios.forEach(r => r.addEventListener('change', () => {
+  answered.add(r.name);
+  btn.disabled = answered.size < 3;
+}));
+
+btn.addEventListener('click', () => {
+  const score = ['q1','q2','q3'].reduce((s, q) => 
+    s + parseInt(document.querySelector(`input[name="${q}"]:checked`).value), 0);
+  
+  const results = [
+    { min: 0, max: 1, emoji: '😎', title: 'Neurotypical AF', desc: 'You\'re the person who actually enjoys small talk and can handle surprise plans. The algorithm has spoken: you\'re aggressively normal. Congratulations?' },
+    { min: 2, max: 3, emoji: '🤔', title: 'Suspiciously Normal', desc: 'You scored in the "could go either way" zone. You probably have a color-coded calendar but can still make eye contact. The spectrum is waving at you from across the room.' },
+    { min: 4, max: 5, emoji: '🧩', title: 'Autistic Tendencies Detected', desc: 'The signs are there. You\'ve definitely info-dumped on someone who didn\'t ask, and you own noise-cancelling headphones that you consider a medical device.' },
+    { min: 6, max: 6, emoji: '🏆', title: 'Maximum Autism Achieved', desc: 'You scored a perfect 6/6. You probably already suspected this. You\'ve memorized the DSM-5 criteria, ranked your special interests by intensity, and you\'re now wondering if this quiz\'s font choice was intentional.' }
+  ];
+
+  const r = results.find(r => score >= r.min && score <= r.max);
+  
+  document.getElementById('quiz').style.opacity = '0';
+  setTimeout(() => {
+    document.getElementById('quiz').style.display = 'none';
+    const res = document.getElementById('result');
+    res.style.display = 'block';
+    document.getElementById('result-emoji').textContent = r.emoji;
+    document.getElementById('result-title').textContent = r.title;
+    document.getElementById('result-desc').textContent = r.desc;
+    document.getElementById('score-label').textContent = `${score}/6 on the autism scale`;
+    setTimeout(() => {
+      document.getElementById('score-bar').style.width = `${(score/6)*100}%`;
+    }, 100);
+  }, 300);
+});
+</script>
+</body>
+</html>
